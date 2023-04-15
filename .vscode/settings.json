@@ -3,7 +3,11 @@
         "ostream": "cpp",
         "utility": "cpp",
         "iostream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "deque": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp"
     },
-    "workbench.panel.defaultLocation": "right"
+    "workbench.panel.defaultLocation": "right",
+    "C_Cpp.errorSquiggles": "disabled"
 }
