@@ -6,7 +6,9 @@
         "iosfwd": "cpp",
         "deque": "cpp",
         "xhash": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "vector": "cpp",
+        "algorithm": "cpp"
     },
     "workbench.panel.defaultLocation": "right",
     "C_Cpp.errorSquiggles": "disabled"
