@@ -8,7 +8,10 @@
         "xhash": "cpp",
         "xstring": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "ios": "cpp"
     },
     "workbench.panel.defaultLocation": "right",
     "C_Cpp.errorSquiggles": "disabled"
