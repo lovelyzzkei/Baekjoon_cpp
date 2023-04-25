@@ -11,7 +11,9 @@
         "algorithm": "cpp",
         "string": "cpp",
         "unordered_map": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "cstdlib": "cpp",
+        "stack": "cpp"
     },
     "workbench.panel.defaultLocation": "right",
     "C_Cpp.errorSquiggles": "disabled"
