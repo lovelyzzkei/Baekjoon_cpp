@@ -7,41 +7,38 @@
 
 using namespace std;
 
-int n, m, cache[N];
-bool visited[N];
+int n, m;
+bool isFinished = false, visited[N];
 vector<vector<int>> relation;
 
-void init() 
+int dfs(int curr)
 {
-    memset(visited, 0, n*sizeof(bool));
-    for (int i = 0; i < n; i++) {
-        cache[i] = -1;
-    }
-}
-
-int dfs(int prev, int curr)
-{
-    int &ret = cache[curr];
-    if (ret != -1)
-        return ret;
-
-    ret = 0;
+    if (isFinished)
+        return 0;
+        
+    int ret = 0;
     bool isLast = true;
     for (int next : relation[curr]) {
-        if (!visited[next] || (visited[next] && prev != next))
+        if (!visited[next])
         {
             isLast = false;
             visited[next] = true;
-            ret = max(ret, dfs(curr, next) + 1);
+            ret = max(ret, dfs(next) + 1);
+            visited[next] = false;
         }
     }
+    
+    if (ret >= 4) 
+        isFinished = true;
 
     if (isLast)
         return 0;
+        
+    if (isFinished)
+        return ret;
 
     return ret;
 }
-
 
 int main(void)
 {
@@ -51,7 +48,6 @@ int main(void)
     for (int i = 0; i < n; i++) {
         vector<int> v;
         relation.push_back(v);
-        cache[i] = -1;
     }
 
     int a, b;
@@ -62,14 +58,15 @@ int main(void)
     }
 
 
+
     int depth = 0;
     for (int i = 0; i < n; i++) {
-        init();
+        memset(visited, 0, n*sizeof(bool));    
         visited[i] = true;
-        depth = max(depth, dfs(-1, i));
+        depth = max(depth, dfs(i));
     }
 
-    if (depth >= 4) cout << 1;
+    if (isFinished) cout << 1;
     else cout << 0;
 
     return 0;

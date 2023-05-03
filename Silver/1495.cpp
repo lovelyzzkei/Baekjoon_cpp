@@ -20,9 +20,9 @@ int play(int idx, int v)
         return ret;
 
     visited[idx][v] = true;
-    if (v - volume[idx] >= 0 && !visited[idx][v-volume[idx]])
+    if (v - volume[idx] >= 0 && !visited[idx+1][v-volume[idx]])
         ret = max(ret, play(idx+1, v-volume[idx]));
-    if (v + volume[idx] <= m && !visited[idx][v+volume[idx]])
+    if (v + volume[idx] <= m && !visited[idx+1][v+volume[idx]])
         ret = max(ret, play(idx+1, v+volume[idx]));
 
     return ret;
