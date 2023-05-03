@@ -2,15 +2,16 @@
 #include <deque>
 #include <vector>
 #include <memory.h>
+#include <algorithm>
 
 #define N 100001
 #define FAST_IO ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 
 using namespace std;
 
-int n, ans[N], height[N];
+int n;
 bool visited[N];
-deque<int> dq;
+deque<int> dq, ans;
 vector<vector<int>> graph(N);
 
 int main(void)
@@ -24,48 +25,52 @@ int main(void)
         graph[a].push_back(b);
         graph[b].push_back(a);
     }
+
+    int num;
     for (int i = 0; i < n; i++) {
-        cin >> ans[i];
+        cin >> num;
+        ans.push_back(num);
     }
 
     memset(visited, 0, N*sizeof(bool));
 
-    int h = 0;
-    dq.push_back(1);
-    visited[1] = true;
+    
+    if (ans.front() != 1)
+    {
+        cout << 0;
+        return 0;
+    }
+
+    visited[ans.front()] = true;
+    dq.push_back(ans.front());
+    ans.pop_front();
 
     while (!dq.empty()) {
-        int size = dq.size();
-        for (int l = 0; l < size; l++) {
-            int curr = dq.front();
-            dq.pop_front();
+        int curr = dq.front();
+        dq.pop_front();
+        
+        while (true) {
+            int next = ans.front();
+            auto iter = find(graph[curr].begin(), graph[curr].end(), next);
 
-            height[curr] = h;
-            for (int next : graph[curr]) {
-                if (!visited[next])
-                {
-                    visited[next] = true;
-                    dq.push_back(next);
-                }
+            if (iter == graph[curr].end())
+                break;
+
+            visited[next] = true;
+            ans.pop_front();
+            dq.push_back(next);
+        }
+
+        for (auto iter = graph[curr].begin(); iter != graph[curr].end(); iter++) {
+            if (!visited[*iter])
+            {
+                cout << 0;
+                return 0;
             }
         }
 
-        h++;
     }
-
-    bool correct = true;
-    for (int i = 0; i < n-1; i++) {
-        if (height[ans[i]] > height[ans[i+1]])
-        {
-            correct = false;
-            break;
-        }
-    }
-
-    if (correct)
-        cout << 1;
-    else
-        cout << 0;
-
+   
+    cout << 1;
     return 0;
 }
